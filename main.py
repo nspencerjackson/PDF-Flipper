@@ -1,5 +1,6 @@
 from reader import read, determineMonth
 import sys
+from datetime import date
 
 repeat = True
 year = ""
@@ -8,11 +9,13 @@ month = 0
 try:
     while repeat:
         # Gets the year you are in
-        print("What year is it? (eg. 2022)")
-        year = input()
+        #print("What year is it? (eg. 2022)")
+        #year = input()
+        year = date.today().year
         # Gets the month
-        print("What month is it? (eg. 11 [is November])")
-        month = input()
+        #print("What month is it? (eg. 11 [is November])")
+        #month = input()
+        month = date.today().month
         # Gets last digits of filename to be opened (Scanned files all have same name)
         filename_add_on = input("What are the last 3 digits of the filename?")
         # def read() call
