@@ -1,9 +1,18 @@
 from PyPDF2 import PdfFileReader, PdfFileWriter
+from datetime import date
 
 def determineMonth(inMonth):
     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     retMonth = inMonth + "_" + months[int(inMonth)-1]
     return retMonth
+
+def checkDay(inDay, inMonth, inYear):
+    retVal = ""
+    if (int(inDay) < date.today().day):
+        retVal += inDay + "_" + inMonth + "_" + inYear
+    else:
+
+    return retVal
 
 def read(filename_add_on, inYear, inMonth):
     boolR = False
@@ -33,9 +42,11 @@ def read(filename_add_on, inYear, inMonth):
         page.rotateClockwise(90)
         pdf_writer.addPage(page)
     # Gets date for the rotated PDF for the filename
-    filename = input("What is the date of this PDF?")
-    filename += ".pdf"
-    filename = filename.replace("/","_")
+    #filename = input("What is the date of this PDF?")
+    day = input("Which Day was it from?")
+    filename = checkDay(day, inMonth, inYear)
+    #filename += ".pdf"
+    #filename = filename.replace("/","_")
     # Adds "_prior" to filename
     if boolR:
         filename = filename.replace(".","_prior.")
