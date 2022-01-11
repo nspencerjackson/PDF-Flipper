@@ -1,5 +1,6 @@
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from datetime import date
+from checkDay import *
 
 def determineMonth(inMonth):
     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -10,12 +11,18 @@ def checkDay(inDay, inMonth, inYear):
     retVal = ""
     if (int(inDay) < date.today().day):
         retVal += inDay + "_" + inMonth + "_" + inYear
+    elif (int(inDay) == date.today().day):
+        retVal += inDay + "_" + inMonth + "_" + inYear
     else:
-
+        retDate = prevDay(inDay, inMonth, inYear)
+        retVal += retDate + "_" + inMonth + "_" + inYear 
     return retVal
 
 def read(filename_add_on, inYear, inMonth):
     boolR = False
+
+    print("entered")
+
     # Where the original file is located
     in_dir = "E:\\BROTHER"
     # Start of the filename
@@ -45,7 +52,7 @@ def read(filename_add_on, inYear, inMonth):
     #filename = input("What is the date of this PDF?")
     day = input("Which Day was it from?")
     filename = checkDay(day, inMonth, inYear)
-    #filename += ".pdf"
+    filename += ".pdf"
     #filename = filename.replace("/","_")
     # Adds "_prior" to filename
     if boolR:

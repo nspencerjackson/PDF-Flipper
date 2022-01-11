@@ -12,7 +12,7 @@ try:
         # Gets the year you are in
         #print("What year is it? (eg. 2022)")
         #year = input()
-        year = date.today().year
+        year = str(date.today().year)
         # Gets the month
         #print("What month is it? (eg. 11 [is November])")
         #month = input()
