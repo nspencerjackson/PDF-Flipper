@@ -6,6 +6,7 @@ repeat = True
 year = ""
 month = 0
 
+# try statement
 try:
     while repeat:
         # Gets the year you are in
