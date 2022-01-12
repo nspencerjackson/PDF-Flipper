@@ -3,25 +3,27 @@ from datetime import date
 from checkDay import *
 
 def determineMonth(inMonth):
+    retMonth = ""
     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    retMonth = inMonth + "_" + months[int(inMonth)-1]
+    retMonth = str(inMonth) + "_" + months[int(inMonth)-1]
     return retMonth
 
-def checkDay(inDay, inMonth, inYear):
+def checkDayFunc(inDay, inMonth, inYear):
     retVal = ""
+    retDate = ""
     if (int(inDay) < date.today().day):
-        retVal += inDay + "_" + inMonth + "_" + inYear
+        retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
     elif (int(inDay) == date.today().day):
-        retVal += inDay + "_" + inMonth + "_" + inYear
+        retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
     else:
         retDate = prevDay(inDay, inMonth, inYear)
-        retVal += retDate + "_" + inMonth + "_" + inYear 
+        retVal += retDate + "_" + str(inMonth) + "_" + inYear 
     return retVal
 
 def read(filename_add_on, inYear, inMonth):
     boolR = False
+    filename = ""
 
-    print("entered")
 
     # Where the original file is located
     in_dir = "E:\\BROTHER"
@@ -50,13 +52,21 @@ def read(filename_add_on, inYear, inMonth):
         pdf_writer.addPage(page)
     # Gets date for the rotated PDF for the filename
     #filename = input("What is the date of this PDF?")
-    day = input("Which Day was it from?")
-    filename = checkDay(day, inMonth, inYear)
-    filename += ".pdf"
+    #import pdb; pdb.set_trace()
+    #day = input("Which Day was it from?")
+    #filename = checkDayFunc(day, inMonth, inYear)
+    #filename += ".pdf"
     #filename = filename.replace("/","_")
     # Adds "_prior" to filename
     if boolR:
-        filename = filename.replace(".","_prior.")
+        day = date.today().day
+        filename = checkDayFunc(day, inMonth, inYear)
+        filename += "."
+        filename = filename.replace(".","_prior")
+    else:
+        day = input("Which Day was it from?")
+        filename = checkDayFunc(day, inMonth, inYear)
+    filename += ".pdf"
     # Creates final file in destination directory
     pdf_out = open(out_dir + "\\" + filename, 'wb')
     pdf_writer.write(pdf_out)

@@ -20,6 +20,7 @@ try:
         # Gets last digits of filename to be opened (Scanned files all have same name)
         filename_add_on = input("What are the last 3 digits of the filename?")
         # def read() call
+        #import pdb; pdb.set_trace()
         read(filename_add_on, year, month)
         # Checks to see if you want to rotate another PDF
         print("Is there another file?")
