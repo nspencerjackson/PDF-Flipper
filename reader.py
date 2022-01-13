@@ -11,12 +11,13 @@ def determineMonth(inMonth):
 def checkDayFunc(inDay, inMonth, inYear):
     retVal = ""
     retDate = ""
+    #import pdb; pdb.set_trace()
     if (int(inDay) < date.today().day):
         retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
     elif (int(inDay) == date.today().day):
         retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
     else:
-        retDate = prevDay(inDay, inMonth, inYear)
+        retDate = prevDay(inMonth, inDay, inYear)
         retVal += retDate + "_" + str(inMonth) + "_" + inYear 
     return retVal
 
