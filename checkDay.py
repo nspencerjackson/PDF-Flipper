@@ -30,5 +30,6 @@ def checkYear(inMonth, inDay, inYear):
         day = lastDay(lastMonth, lastYear)
         retDate = date(lastYear, lastMonth, day)
     else:
-        retDate = date(int(inYear), inMonth, inDay)
+        lastMonth = inMonth - 1
+        retDate = date(int(inYear), lastMonth, inDay)
     return retDate

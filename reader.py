@@ -17,8 +17,8 @@ def checkDayFunc(inDay, inMonth, inYear):
     elif (int(inDay) == date.today().day):
         retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
     else:
-        retDate = prevDay(inMonth, inDay, inYear)
-        retVal += retDate + "_" + str(inMonth) + "_" + inYear 
+        retDate = checkYear(int(inMonth), int(inDay), int(inYear))
+        retVal += str(retDate.day) + "_" + str(retDate.month) + "_" + str(retDate.year)
     return retVal
 
 def read(filename_add_on, inYear, inMonth):
