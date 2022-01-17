@@ -21,6 +21,17 @@ def checkDayFunc(inDay, inMonth, inYear):
         retVal += str(retDate.day) + "_" + str(retDate.month) + "_" + str(retDate.year)
     return retVal
 
+def directoryFunc(inDay, inMonth, inYear):
+    retVal = date.today()
+    if (int(inDay) < date.today().day):
+        retVal = date(inDay, inMonth, inYear)
+    elif (int(inDay) == date.today().day):
+        retVal = date.today()
+    else:
+        retVal = checkYear(int(inMonth), int(inDay), int(inYear))
+        #retVal = date(retDate.day, retDate.month,retDate.year)
+    return retVal
+
 def read(filename_add_on, inYear, inMonth):
     boolR = False
     filename = ""
@@ -53,7 +64,6 @@ def read(filename_add_on, inYear, inMonth):
         pdf_writer.addPage(page)
     # Gets date for the rotated PDF for the filename
     #filename = input("What is the date of this PDF?")
-    #import pdb; pdb.set_trace()
     #day = input("Which Day was it from?")
     #filename = checkDayFunc(day, inMonth, inYear)
     #filename += ".pdf"
@@ -68,6 +78,10 @@ def read(filename_add_on, inYear, inMonth):
         day = input("Which Day was it from?")
         filename = checkDayFunc(day, inMonth, inYear)
     filename += ".pdf"
+    #import pdb; pdb.set_trace()
+    dirVal = directoryFunc(day, inMonth, inYear)
+    mon = determineMonth(dirVal.month)
+    out_dir = r"C:\\Users\\Nicholas\\Ward Packaging\\Procurement - Documents\\Purchasing Documents\\Pickup Reports\\" + str(dirVal.year) + "\\" + mon
     # Creates final file in destination directory
     pdf_out = open(out_dir + "\\" + filename, 'wb')
     pdf_writer.write(pdf_out)
