@@ -19,8 +19,8 @@ def checkDayFunc(inDay, inMonth, inYear):
         retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
     # if it is the same day from previous month
     elif (int(inDay) == date.today().day):
-        retDate = checkYear(int(inMonth), int(inDay), int(inYear))
-        retVal += str(retDate.day) + "_" + str(retDate.month) + "_" + str(retDate.year)
+        #retDate = checkYear(int(inMonth), int(inDay), int(inYear))
+        retVal += str(inDay) + "_" + str(inMonth) + "_" + str(inYear)
     # if date is greater than today's date (previous month)
     else:
         retDate = checkYear(int(inMonth), int(inDay), int(inYear))
