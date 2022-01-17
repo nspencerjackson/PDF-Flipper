@@ -2,25 +2,32 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 from datetime import date
 from checkDay import *
 
+# Creates the directory path
 def determineMonth(inMonth):
     retMonth = ""
     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     retMonth = str(inMonth) + "_" + months[int(inMonth)-1]
     return retMonth
 
+# Checks if the day entered is before or after today's date
+# Creates the filename
 def checkDayFunc(inDay, inMonth, inYear):
     retVal = ""
     retDate = ""
-    #import pdb; pdb.set_trace()
+    # if day is before today
     if (int(inDay) < date.today().day):
         retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
+    # if it is the same day from previous month
     elif (int(inDay) == date.today().day):
-        retVal += str(inDay) + "_" + str(inMonth) + "_" + inYear
+        retDate = checkYear(int(inMonth), int(inDay), int(inYear))
+        retVal += str(retDate.day) + "_" + str(retDate.month) + "_" + str(retDate.year)
+    # if date is greater than today's date (previous month)
     else:
         retDate = checkYear(int(inMonth), int(inDay), int(inYear))
         retVal += str(retDate.day) + "_" + str(retDate.month) + "_" + str(retDate.year)
     return retVal
 
+# Gets new directory location for previous month PDF
 def directoryFunc(inDay, inMonth, inYear):
     retVal = date.today()
     if (int(inDay) < date.today().day):
@@ -32,15 +39,16 @@ def directoryFunc(inDay, inMonth, inYear):
         #retVal = date(retDate.day, retDate.month,retDate.year)
     return retVal
 
+# Reads file and files it
 def read(filename_add_on, inYear, inMonth):
     boolR = False
     filename = ""
-
 
     # Where the original file is located
     in_dir = "E:\\BROTHER"
     # Start of the filename
     filename = "BRNB4220010A8A0_000"
+    # Gets directory name of month
     mon = determineMonth(inMonth)
     # The final directory where the rotated PDF will go
     out_dir = r"C:\\Users\\Nicholas\\Ward Packaging\\Procurement - Documents\\Purchasing Documents\\Pickup Reports\\" + inYear + "\\" + mon
@@ -63,22 +71,16 @@ def read(filename_add_on, inYear, inMonth):
         page.rotateClockwise(90)
         pdf_writer.addPage(page)
     # Gets date for the rotated PDF for the filename
-    #filename = input("What is the date of this PDF?")
-    #day = input("Which Day was it from?")
-    #filename = checkDayFunc(day, inMonth, inYear)
-    #filename += ".pdf"
-    #filename = filename.replace("/","_")
-    # Adds "_prior" to filename
     if boolR:
         day = date.today().day
         filename = checkDayFunc(day, inMonth, inYear)
         filename += "."
+        # Adds "_prior" to filename
         filename = filename.replace(".","_prior")
     else:
         day = input("Which Day was it from?")
         filename = checkDayFunc(day, inMonth, inYear)
     filename += ".pdf"
-    #import pdb; pdb.set_trace()
     dirVal = directoryFunc(day, inMonth, inYear)
     mon = determineMonth(dirVal.month)
     out_dir = r"C:\\Users\\Nicholas\\Ward Packaging\\Procurement - Documents\\Purchasing Documents\\Pickup Reports\\" + str(dirVal.year) + "\\" + mon
