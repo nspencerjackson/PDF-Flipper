@@ -31,7 +31,7 @@ def checkDayFunc(inDay, inMonth, inYear):
 def directoryFunc(inDay, inMonth, inYear):
     retVal = date.today()
     if (int(inDay) < date.today().day):
-        retVal = date(int(inDay), inMonth, int(inYear))
+        retVal = date(int(inYear), int(inMonth), int(inDay))
     elif (int(inDay) == date.today().day):
         retVal = date.today()
     else:
